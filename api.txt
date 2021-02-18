@@ -1,0 +1,212 @@
+/api/getAllActivities
+
+RESPONSE:
+
+[
+    {
+        "ID": 1,
+        "uczen_ID": 1,
+        "data_wprowadzenia": "2021-02-15T12:35:27.000Z",
+        "typ_ID": 2,
+        "wynik": 420,
+        "user": {
+            "ID": 1,
+            "userName": "admin",
+            "passwd": "qazwsx",
+            "imie": "Piotr",
+            "nazwisko": "K",
+            "klasa_id": 1,
+            "klasy": {
+                "ID": 1,
+                "nazwa": "4tc",
+                "nauczyciel_ID": 1,
+                "nauczyciele": {
+                    "ID": 1,
+                    "user_ID": 1,
+                    "imie": "Daniel",
+                    "nazwisko": "D"
+                }
+            }
+        },
+        "aktywnosc_typ": {
+            "ID": 2,
+            "nazwa": "Jazda na rowerze"
+        }
+    },
+    {
+        "ID": 2,
+        "uczen_ID": 1,
+        "data_wprowadzenia": "2021-02-15T12:36:27.000Z",
+        "typ_ID": 3,
+        "wynik": 411,
+        "user": {
+            "ID": 1,
+            "userName": "admin",
+            "passwd": "qazwsx",
+            "imie": "Piotr",
+            "nazwisko": "K",
+            "klasa_id": 1,
+            "klasy": {
+                "ID": 1,
+                "nazwa": "4tc",
+                "nauczyciel_ID": 1,
+                "nauczyciele": {
+                    "ID": 1,
+                    "user_ID": 1,
+                    "imie": "Daniel",
+                    "nazwisko": "D"
+                }
+            }
+        },
+        "aktywnosc_typ": {
+            "ID": 3,
+            "nazwa": "Spacer"
+        }
+    }
+]
+
+czyli w react dajecie:
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activities: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:8080/api/getAllActivities')
+      .then(res => {
+        const activities = res.data;
+        this.setState({ activities });    
+        console.log(res.data);
+        // ^ to loguje do konsoli w przegladarce odpowiedz z API, mozna wyciagnac wszystkie nazwy pol zeby moc wypisac dane
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <table>
+          <thead>
+              <tr>
+                <th>ID</th>
+                <th>Uczeń</th>
+                <th>Data wprowadzenia</th>
+                <th>Typ aktywności</th>
+                <th>Wynik</th>
+              </tr>
+          </thead>
+
+          <tbody>
+            {this.state.activities.map(act => {
+              return ( <tr key={act.ID}>
+                <td>{act.ID}</td>
+                <td>{act.user.imie} {act.user.nazwisko}</td>
+                <td>{act.data_wprowadzenia.split("T").join(" ").split(".")[0]}</td>
+                {/* data_wprowadzenia to jest string dlatego nie mozna uzyc metod obiektu Date z JS, wiec mozna to sformatowac jak string
+                    a nie chcialo mi sie bawic z konwertowaniem do Date w react */} 
+                <td>{act.aktywnosc_typ.nazwa}</td>
+                <td>{act.wynik}</td>
+              </tr> )
+            })}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+}
+
+
+
+
+/api/getActivity?id=<id>
+
+RESPONSE dla id=1
+
+{
+    "ID": 1,
+    "uczen_ID": 1,
+    "data_wprowadzenia": "2021-02-15T12:35:27.000Z",
+    "typ_ID": 2,
+    "wynik": 420,
+    "user": {
+        "ID": 1,
+        "userName": "admin",
+        "passwd": "qazwsx",
+        "imie": "Piotr",
+        "nazwisko": "K",
+        "klasa_id": 1,
+        "klasy": {
+            "ID": 1,
+            "nazwa": "4tc",
+            "nauczyciel_ID": 1,
+            "nauczyciele": {
+                "ID": 1,
+                "user_ID": 1,
+                "imie": "Daniel",
+                "nazwisko": "D"
+            }
+        }
+    },
+    "aktywnosc_typ": {
+        "ID": 2,
+        "nazwa": "Jazda na rowerze"
+    }
+}
+
+
+
+
+
+/api/getUser?id=<id>
+
+RESPONSE dla id=1
+
+{
+    "ID": 1,
+    "userName": "admin",
+    "passwd": "qazwsx",
+    "imie": "Piotr",
+    "nazwisko": "K",
+    "klasa_id": 1,
+    "aktywnoscs": [
+        {
+            "ID": 1,
+            "uczen_ID": 1,
+            "data_wprowadzenia": "2021-02-15T12:35:27.000Z",
+            "typ_ID": 2,
+            "wynik": 420,
+            "aktywnosc_typ": {
+                "ID": 2,
+                "nazwa": "Jazda na rowerze"
+            }
+        },
+        {
+            "ID": 2,
+            "uczen_ID": 1,
+            "data_wprowadzenia": "2021-02-15T12:36:27.000Z",
+            "typ_ID": 3,
+            "wynik": 411,
+            "aktywnosc_typ": {
+                "ID": 3,
+                "nazwa": "Spacer"
+            }
+        }
+    ],
+    "klasy": {
+        "ID": 1,
+        "nazwa": "4tc",
+        "nauczyciel_ID": 1,
+        "nauczyciele": {
+            "ID": 1,
+            "user_ID": 1,
+            "imie": "Daniel",
+            "nazwisko": "D"
+        }
+    }
+}
