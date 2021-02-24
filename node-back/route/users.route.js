@@ -3,4 +3,7 @@ module.exports = function(app) {
 
     // GET a user by id
     app.get('/api/getUser', users.getUser);
+
+    // Verify user credentials
+    app.post('/api/login', users.login);
 }

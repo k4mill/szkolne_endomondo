@@ -1,0 +1,11 @@
+.wrapper {
+    width: 50%;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper form {
+    width: 50%;
+}

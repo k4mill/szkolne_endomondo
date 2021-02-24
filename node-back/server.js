@@ -42,13 +42,18 @@ const app = express();
 
 app.use(express.static(path));
 
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
+
 var corsOptions = {
   origin: "http://localhost:3000"
 };
-
-app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require('./config/db.config.js');
 
@@ -61,9 +66,3 @@ app.get('/', function (req,res) {
 require('./route/aktywnosc.route.js')(app);
 require('./route/users.route.js')(app);
 require('./route/klasy.route.js')(app);
-
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
