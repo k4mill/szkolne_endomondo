@@ -1,0 +1,85 @@
+<Formik
+                    initialValues={{
+                        imie: "",
+                        nazwisko: "",
+                        email: "",
+                        login: "",
+                        haslo: "",
+                    }}
+                    onSubmit={values => {
+                        console.log(JSON.stringify(values))
+                    }}
+                    validationSchema = {Yup.object().shape({
+                        imie: Yup.string()
+                            .min(3, "To pole wymaga minimum 3 znaków")
+                            .max(32, "To pole nie może być dłuższe niż 32 znaki")
+                            .required("To pole jest wymagane"),
+                        nazwisko: Yup.string()
+                            .min(3, "To pole wymaga minimum 3 znaków")
+                            .max(32, "To pole nie może być dłuższe niż 32 znaki")
+                            .required("To pole jest wymagane"),
+                        email: Yup.string()
+                            .min(3, "To pole wymaga minimum 3 znaków")
+                            .max(32, "To pole nie może być dłuższe niż 32 znaki")
+                            .required("To pole jest wymagane")
+                            .matches("^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$", "Proszę podać prawidłowy adres e-mail"),
+                        login: Yup.string()
+                            .min(3, "To pole wymaga minimum 3 znaków")
+                            .max(32, "To pole nie może być dłuższe niż 32 znaki")
+                            .required("To pole jest wymagane"),
+                        haslo: Yup.string()
+                            .min(8, "To pole wymaga minimum 8 znaków")
+                            .max(48, "To pole nie może być dłuższe niż 48 znaków")
+                            .required("To pole jest wymagane")
+                            .matches("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$", "Hasło musi zawierać co najmniej 8 znaków, jedną cyfrę, jedną małą oraz jedną wielką literę"),
+                    })}
+                >
+
+                    {({ errors, touched }) => (
+                        <Form>
+                        <div className="form-wrapper">
+                            <div className="form-child">
+                                <Field name="imie" />
+                                <label htmlFor="imie">Imię</label>
+                                {errors.imie && touched.imie ? (
+                                    <div className="errorDiv">{errors.imie}</div>
+                                ) : null}
+                            </div>
+                            
+                            <div className="form-child"> 
+                                <Field name="nazwisko" />
+                                <label htmlFor="nazwisko">Nazwisko</label>
+                                {errors.nazwisko && touched.nazwisko ? (
+                                    <div>{errors.nazwisko}</div>
+                                ) : null}
+                            </div>
+                        
+                            <div className="form-child">
+                                <Field name="email" type="email" />
+                                <label htmlFor="email">E-mail</label>
+                                {errors.email && touched.email ? <div>{errors.email}</div> : null}
+                            </div>
+                            
+                            <div className="form-child">
+                                <Field name="login" />
+                                <label htmlFor="login">Login</label>
+                                {errors.login && touched.login ? (
+                                    <div>{errors.login}</div>
+                                ) : null}
+                            </div>
+
+                            <div className="form-child">
+                                <Field type="password" name="haslo" />
+                                <label htmlFor="haslo">Hasło</label>
+                                {errors.haslo && touched.haslo ? (
+                                    <div>{errors.haslo}</div>
+                                ) : null}
+                            </div>
+                            
+                            <button type="submit" className="login-button">Zarejestruj się</button>
+                        </div>
+                        
+                        </Form>
+                    )}
+
+                </Formik>

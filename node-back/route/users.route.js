@@ -6,4 +6,10 @@ module.exports = function(app) {
 
     // Verify user credentials
     app.post('/api/login', users.login);
+
+    // Register a user
+    app.post('/api/createUser', users.createUser);
+
+    // GET a user by username
+    app.get('/api/getUserByUsername', users.getUserByUsername);
 }

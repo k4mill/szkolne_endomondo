@@ -66,3 +66,4 @@ app.get('/', function (req,res) {
 require('./route/aktywnosc.route.js')(app);
 require('./route/users.route.js')(app);
 require('./route/klasy.route.js')(app);
+require('./route/aktywnosc_typ.route.js')(app);

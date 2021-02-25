@@ -1,0 +1,75 @@
+.form-wrapper-add-act {
+    position: absolute;
+    left: 35vw;
+    top: 10vh;
+    width: 30vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.h2-wrapper {
+    flex: 1;
+}
+
+.h2-wrapper h2 {
+    color: rgba(22,160,133,1);
+}
+
+.form-child-act {
+    flex: 2;
+    width: 100%;
+}
+
+.form-child-select {
+    width: 100%;
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.form-child-act input, .form-child-act label {
+    width: 100%;
+    outline: 0;
+    border: 0;
+    transition: all 0.25s;
+    line-height: 150%;
+}
+
+.form-child-act label {
+    font-size: 100%;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    color: #525252;
+    position: relative;
+    top: -24px;
+    left: 6px;
+    transition: 0.3s ease all;
+    pointer-events: none;
+}
+
+.form-child-select label {
+    text-align: left;
+    font-size: 125%;
+    position: relative;
+    left: 6px;
+    color: #525252;
+}
+
+.form-child-select label, .form-child-select .css-2b097c-container {
+    width: 100%;
+}
+
+.form-child-act input:focus~label, .form-child-act input:valid~label {
+    top: -48px;
+    color: rgba(22,160,133,1);
+}
+
+.form-child-act input:focus {
+    box-shadow: 0 0 5px rgba(22,160,133,1);
+}
