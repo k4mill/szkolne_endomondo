@@ -1,0 +1,38 @@
+.pods-wrapper {
+    position: absolute;
+    left: 20vw;
+    top: 15vh;
+    width: 60vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pods-wrapper table th {
+    font-weight: bold;
+    color: black;
+}
+
+.pods-wrapper table td, .pods-wrapper table th {
+    border: 1px solid black;
+}
+
+.pods-wrapper table tr {
+    color: #525252;
+    height: 5vh;
+    transition: all 0.15s ease;
+}
+
+.pods-wrapper table {
+    flex: 9;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.pods-wrapper table tr:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: all 0.15s ease;
+}

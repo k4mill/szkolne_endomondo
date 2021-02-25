@@ -4,7 +4,7 @@ import React, { Component } from "react";
 class Profil extends Component {
     render() {
       return ( 
-        <h1>Witold Jaśniecki Profilowy- pochłaniacz życia</h1>
+        <h1>Profile</h1>
        )
     }
   }

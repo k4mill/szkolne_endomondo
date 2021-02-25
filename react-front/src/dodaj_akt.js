@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import './css/dodaj_akt.css';
 import Select from 'react-select';
+import './css/main.css';
 
 function getCurrentDate() {
   let d = new Date();
@@ -73,7 +74,6 @@ class DodajAkt extends Component {
         console.log(err);
       })
   }
-  
 
     render() {
       return ( 
