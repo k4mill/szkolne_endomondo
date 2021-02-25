@@ -21,6 +21,10 @@
 .form-child-act {
     flex: 2;
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 }
 
 .form-child-select {
@@ -42,12 +46,12 @@
 
 .form-child-act label {
     font-size: 100%;
-    text-align: center;
+    text-align: left;
     font-weight: bold;
     width: 100%;
     color: #525252;
     position: relative;
-    top: -24px;
+    top: -22px;
     left: 6px;
     transition: 0.3s ease all;
     pointer-events: none;

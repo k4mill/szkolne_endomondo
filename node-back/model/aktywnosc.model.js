@@ -2,6 +2,7 @@ module.exports = (sequelize, Sequelize) => {
     const Aktywnosc = sequelize.define('aktywnosc', {
       ID: {
         primaryKey: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER,
         allowNull: false
       },
@@ -11,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       data_wprowadzenia: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       typ_ID: {
         type: Sequelize.INTEGER,

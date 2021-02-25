@@ -14,6 +14,7 @@ exports.getActivity = (req, res) => {
 
 exports.getAllActivities = (req, res) => {
     Aktywnosc.findAll({
+        where: { uczen_ID: req.query.uczen_ID },
         include: [{all: true, nested: true}]
       })
       .then(aktywnosc => {
@@ -24,11 +25,10 @@ exports.getAllActivities = (req, res) => {
 
 exports.insertActivity = (req, res) => {
   Aktywnosc.create({
-    ID: req.query.id,
-    uczen_ID: req.query.uczen_ID,
-    data_wprowadzenia: req.query.dat_wpr,
-    typ_ID: req.query.typ_ID,
-    wynik: req.query.wynik,
+    uczen_ID: req.body.uczen_ID,
+    data_wprowadzenia: req.body.dat_wpr,
+    typ_ID: req.body.typ_ID,
+    wynik: req.body.wynik,
   })
   .then(aktywnosc => {
     res.json(aktywnosc);

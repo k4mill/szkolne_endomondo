@@ -3,17 +3,61 @@ import axios from 'axios';
 import './css/dodaj_akt.css';
 import Select from 'react-select';
 
+function getCurrentDate() {
+  let d = new Date();
+  return d.toISOString().slice(0, 19).replace('T', ' ');
+}
+
 class DodajAkt extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      options: []
+      options: [],
+      wynik: '',
+      typ: '1'
     }
 
-    this.handleSubmit = () => {
-      return 1;
-    }
+    this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handleScoreChange = this.handleScoreChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleScoreChange(event) {
+    this.setState({wynik: event.target.value});
+  }
+
+  handleTypeChange(typ) {
+    this.setState({typ: typ});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    axios.get('http://localhost:8080/api/getUserByUsername', {
+        params: {
+          username: JSON.parse(sessionStorage.getItem('token')).token
+        }
+      })
+      .then(res => {
+        const user_ID = res.data.ID;
+          axios.put('http://localhost:8080/api/insertActivity', {
+            uczen_ID: user_ID,
+            data_wprowadzenia: `'${getCurrentDate()}'`,
+            typ_ID: `${this.state.typ.value}`,
+            wynik: `${this.state.wynik}`
+          })
+        .then(res => {
+          console.log("Successfully inserted an activity");
+          console.log(getCurrentDate())
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   componentDidMount() {
@@ -40,15 +84,14 @@ class DodajAkt extends Component {
               </div>
               <div className="form-child-select">
                 <label>Rodzaj aktywności</label>
-                <Select options={this.state.options} />
+                <Select options={this.state.options} onChange={this.handleTypeChange} />
               </div>
               
               <div className="form-child-act">
-                <input name="wynik" type="text" required />
+                <input name="wynik" type="text" required onChange={this.handleScoreChange}/>
                 <label htmlFor="wynik">Wynik(kg, czas, itp.)</label>
-                <div className="login-button" style={{width: '20%', textAlign: 'center', position: 'relative', left: '40%'}}>Dodaj</div>
+                <button className="login-button" type="submit" style={{textAlign: 'center'}}>Dodaj</button>
               </div>
-              
             </div>
           </form>
        )
