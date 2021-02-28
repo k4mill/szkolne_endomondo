@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   Link,
   NavLink
@@ -35,15 +34,16 @@ export default function RouterMenu() {
       <div className="navbar-wrapper">
           <nav className="navbar">
             {routes.map(route => (
-              <Link
+              <NavLink
                 key={route.path}
                 as={NavLink}
                 to={route.path}
                 activeClassName="active"
+                activeStyle={{boxShadow: '0px 3px 0px rgba(22,160,133,0.55)', transition: '0.15s ease'}}
                 exact
               >
                 {route.name}
-              </Link>
+              </NavLink>
             ))}
           <a onClick={logout}>Wyloguj</a>
           </nav>

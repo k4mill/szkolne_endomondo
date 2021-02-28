@@ -3,6 +3,8 @@ import axios from 'axios';
 import './css/dodaj_akt.css';
 import Select from 'react-select';
 import './css/main.css';
+import styles from './css/login.css';
+import classNames from 'classnames';
 
 function getCurrentDate() {
   let d = new Date();
@@ -16,7 +18,9 @@ class DodajAkt extends Component {
     this.state = {
       options: [],
       wynik: '',
-      typ: '1'
+      typ: '',
+      opis: 'Wynik',
+      isActive: false
     }
 
     this.handleTypeChange = this.handleTypeChange.bind(this);
@@ -29,7 +33,19 @@ class DodajAkt extends Component {
   }
 
   handleTypeChange(typ) {
-    this.setState({typ: typ});
+    this.setState({typ: typ}, () => {
+      if(this.state.typ.label == 'Bieganie' || this.state.typ.label == 'Jazda na rowerze' || this.state.typ.label == 'Pływanie' || this.state.typ.label == 'Orbitrek') {
+        this.setState({opis: `Wynik (czas w minutach)`})
+      }
+  
+      else if(this.state.typ.label == 'Spacer') {
+        this.setState({opis: `Wynik (liczba kroków)`})
+      }
+  
+      else if(this.state.typ.label == 'Przysiady' || this.state.typ.label == 'Pompki') {
+        this.setState({opis: `Wynik (liczba powtórzeń)`})
+      }
+    });
   }
 
   handleSubmit(event) {
@@ -50,6 +66,13 @@ class DodajAkt extends Component {
           })
         .then(res => {
           console.log("Successfully inserted an activity");
+          this.setState({typ: this.state.options[0]});
+          this.setState({wynik: ''});
+          this.setState({isActive: !this.state.isActive}, () => {
+            setTimeout(() => {
+              this.setState({isActive: !this.state.isActive})
+            }, 3000)
+          })
           console.log(getCurrentDate())
         })
         .catch(err => {
@@ -69,6 +92,7 @@ class DodajAkt extends Component {
           options.push({ value: `${act.ID}`, label: `${act.nazwa}` })
         })
         this.setState({ options });
+        console.log(styles.animate)
       })
       .catch(err => {
         console.log(err);
@@ -84,13 +108,16 @@ class DodajAkt extends Component {
               </div>
               <div className="form-child-select">
                 <label>Rodzaj aktywności</label>
-                <Select options={this.state.options} onChange={this.handleTypeChange} />
+                <Select defaultValue={{ label: "Wybierz..."}} options={this.state.options} value={this.state.typ} onChange={this.handleTypeChange} maxMenuHeight={150} />
               </div>
               
               <div className="form-child-act">
-                <input name="wynik" type="text" required onChange={this.handleScoreChange}/>
-                <label htmlFor="wynik">Wynik(kg, czas, itp.)</label>
+                <input name="wynik" type="text" required onChange={this.handleScoreChange} value={this.state.wynik}/>
+                <label htmlFor="wynik">{this.state.opis}</label>
                 <button className="login-button" type="submit" style={{textAlign: 'center'}}>Dodaj</button>
+                <p className={this.state.isActive ? 'active' : 'success-text'}>
+                  Pomyślnie dodano aktywność
+                </p>
               </div>
             </div>
           </form>

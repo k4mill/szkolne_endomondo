@@ -12,4 +12,7 @@ module.exports = function(app) {
 
     // DELETE a given activity
     app.delete('/api/deleteActivity', aktywnosc.deleteActivity);
+
+    // GET 3 last activities
+    app.get('/api/getLastActivities', aktywnosc.getLastActivities);
 }

@@ -12,6 +12,21 @@ exports.getActivity = (req, res) => {
     .catch(error => res.status(400).send(error));
 }
 
+exports.getLastActivities = (req, res) => {
+  Aktywnosc.findAll({
+      order: [
+        ['data_wprowadzenia', 'DESC']
+      ],
+      limit: 3,
+      where: { uczen_ID: req.query.uczen_ID },
+      include: [{all: true, nested: true}]
+    })
+    .then(aktywnosc => {
+      res.json(aktywnosc);
+    })
+    .catch(error => res.status(400).send(error));
+};
+
 exports.getAllActivities = (req, res) => {
     Aktywnosc.findAll({
         where: { uczen_ID: req.query.uczen_ID },

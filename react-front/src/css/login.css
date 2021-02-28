@@ -147,5 +147,17 @@ form .form-wrapper {
 }
 
 .success-text {
+    pointer-events: none;
+    opacity: 0;
     color: rgba(22,160,133,1);
+    transform: translateY(-10px);
+    transition: 0.4s ease;
+}
+
+.active {
+    pointer-events: none;
+    color: rgba(22,160,133,1);
+    transform: translateY(0px);
+    opacity: 1;
+    transition: 0.4s ease;
 }
