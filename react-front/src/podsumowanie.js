@@ -61,6 +61,7 @@ class Podsumowanie extends Component {
   }
 
   componentDidMount() {
+    document.title = 'TTM - podsumowanie aktywności';
     let token_username = JSON.parse(sessionStorage.getItem('token')).token;
     this.getActivityList(token_username).then(res => {
       this.setState({activities: res})

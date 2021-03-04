@@ -25,6 +25,10 @@ module.exports = (sequelize, Sequelize) => {
       klasa_id: {
           type: Sequelize.INTEGER,
           allowNull: true
+      },
+      teacher: {
+          type: Sequelize.BOOLEAN,
+          allowNull: false
       }
     });
 

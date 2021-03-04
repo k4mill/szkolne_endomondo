@@ -43,7 +43,3 @@ td svg:hover {
     transform: scale(0.85);
     color: #ee5253;
 }
-
-.Und:hover .toUnd {
-    text-decoration: line-through;
-}

@@ -154,6 +154,22 @@ form .form-wrapper {
     transition: 0.4s ease;
 }
 
+.fail-text {
+    pointer-events: none;
+    color: #ee5253;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: 0.4s ease;
+}
+
+.fail-active {
+    pointer-events: none;
+    color: #ee5253;
+    transform: translateY(0px);
+    opacity: 1;
+    transition: 0.4s ease;
+}
+
 .active {
     pointer-events: none;
     color: rgba(22,160,133,1);

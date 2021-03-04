@@ -37,6 +37,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    document.title = 'TTM - strona główna';
     const username = JSON.parse(sessionStorage.getItem('token')).token;
     this.getLastActivities(username)
       .then(act => {

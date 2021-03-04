@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './css/login.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -55,8 +55,25 @@ export default function Login({ setToken }) {
             loginUsername,
             loginPassword
         });
-        setToken(token);
+
+        if(token.token) {
+            setToken(token);
+            window.location.reload(); // JANUSZOWY WORKAROUND
+        }
+
+        else {
+            updateIsActive(!isActive);
+        }
     }
+
+    useEffect(() => {
+        if(isActive) {
+            setTimeout(() => {
+                updateIsActive(!isActive);
+            }, 4000)
+        }
+        
+    })
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -64,6 +81,7 @@ export default function Login({ setToken }) {
     const [registerUsername, setRegisterUserName] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [message, updateMessage] = useState('');
+    const [isActive, updateIsActive] = useState(false);
 
     const handleRegisterSubmit = async e => {
         e.preventDefault();
@@ -104,6 +122,9 @@ export default function Login({ setToken }) {
                     <div className="form-child">
                         <button className="login-button" type="submit">Zaloguj się</button>
                     </div>
+                    <p className={isActive ? 'fail-active' : 'fail-text'}>
+                        Nieprawidłowy login lub hasło
+                    </p>
                     </div> 
                 </form>
             </div>

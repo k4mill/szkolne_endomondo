@@ -85,6 +85,7 @@ class DodajAkt extends Component {
   }
 
   componentDidMount() {
+    document.title = 'TTM - dodaj aktywność';
     axios.get('http://localhost:8080/api/getActivityTypes')
       .then(res => {
         let options = [];
@@ -112,7 +113,7 @@ class DodajAkt extends Component {
               </div>
               
               <div className="form-child-act">
-                <input name="wynik" type="text" required onChange={this.handleScoreChange} value={this.state.wynik}/>
+                <input name="wynik" type="number" min="0" required onChange={this.handleScoreChange} value={this.state.wynik}/>
                 <label htmlFor="wynik">{this.state.opis}</label>
                 <button className="login-button" type="submit" style={{textAlign: 'center'}}>Dodaj</button>
                 <p className={this.state.isActive ? 'active' : 'success-text'}>

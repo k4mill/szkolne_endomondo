@@ -12,7 +12,6 @@ export default function useToken() {
   const saveToken = userToken => {
     sessionStorage.setItem('token', JSON.stringify(userToken));
     setToken(userToken.token);
-    window.location.reload(); // JANUSZOWY WORKAROUND
   };
 
   const removeToken = userToken => {

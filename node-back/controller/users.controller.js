@@ -2,25 +2,14 @@ const db = require('../config/db.config.js');
 const Users = db.users;
  
 exports.login = (req, res) => {
-    Users.count({
+    Users.findOne({
       where: {
         userName: `${req.body.data.username}`,
         passwd: `${req.body.data.password}`
       }
     })
-    .then((c) => {
-      if(c >= 1) {
-        res.set({
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
-          'Access-Control-Allow-Headers': 'Content-Type,Authorization'
-        });
-        res.send({
-          token: `${req.body.data.username}`
-        });
-      }
-
-      else {
+    .then((u) => {
+      if(!u) {
         res.set({
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
@@ -28,6 +17,30 @@ exports.login = (req, res) => {
         });
         res.send({
           token: 0,
+        });
+      }
+
+      else if(u.teacher == 0) {
+        res.set({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
+          'Access-Control-Allow-Headers': 'Content-Type,Authorization'
+        });
+        res.send({
+          token: `${req.body.data.username}`,
+          teacher: false
+        });
+      }
+
+      else if(u.teacher == 1) {
+        res.set({
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
+          'Access-Control-Allow-Headers': 'Content-Type,Authorization'
+        });
+        res.send({
+          token: `${req.body.data.username}`,
+          teacher: true
         });
       }
     })
