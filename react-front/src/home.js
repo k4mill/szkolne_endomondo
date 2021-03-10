@@ -36,6 +36,19 @@ class Home extends Component {
     }) 
   }
 
+  getUserId() {
+    return axios.get('http://localhost:8080/getUserByUsername', {
+    params: {
+      username: JSON.parse(sessionStorage.getItem('token')).token
+    }})
+    .then(res => {
+      return res.ID;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   componentDidMount() {
     document.title = 'TTM - strona główna';
     const username = JSON.parse(sessionStorage.getItem('token')).token;

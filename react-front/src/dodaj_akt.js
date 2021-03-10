@@ -4,7 +4,6 @@ import './css/dodaj_akt.css';
 import Select from 'react-select';
 import './css/main.css';
 import styles from './css/login.css';
-import classNames from 'classnames';
 
 function getCurrentDate() {
   let d = new Date();
