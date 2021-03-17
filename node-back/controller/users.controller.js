@@ -56,7 +56,8 @@ exports.createUser = (req, res) => {
     passwd: `${req.body.data.password}`,
     imie: `${req.body.data.imie}`,
     nazwisko: `${req.body.data.nazwisko}`,
-    klasa_id: `${req.body.data.klasa_id}`
+    klasa_id: `${req.body.data.klasa_id}`,
+    teacher: 0
   })
   .then(() => {
     res.json("OK")

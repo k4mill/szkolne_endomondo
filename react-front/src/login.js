@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './css/login.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Select from 'react-select';
 
 export default function Login({ setToken }) {
     async function loginUser(creds) {
@@ -98,6 +99,9 @@ export default function Login({ setToken }) {
 
     return(
         <div className="wrapper">
+            <div className="mobile">
+                <h2 style={{textAlign: 'center', fontSize: '300%'}}>Aplikacja mobilna nie jest jeszcze gotowa.</h2>
+            </div>
             <div className="logo-wrapper">
                 <h1>Time To <span className="highlight-text">Move</span></h1>
             </div>
@@ -138,28 +142,28 @@ export default function Login({ setToken }) {
                 <form onSubmit={handleRegisterSubmit}>
                     <div className="form-wrapper">
                         <div className="form-child">
-                            <input name="username" type="text" required onChange={e => setFirstName(e.target.value)} />
-                            <label htmlFor="username">Imię</label>
+                            <input name="name" type="text" required onChange={e => setFirstName(e.target.value)} />
+                            <label htmlFor="name">Imię</label>
                         </div>
 
                         <div className="form-child">
-                            <input name="username" type="text" required onChange={e => setLastName(e.target.value)} />
-                            <label htmlFor="username">Nazwisko</label>
+                            <input name="surname" type="text" required onChange={e => setLastName(e.target.value)} />
+                            <label htmlFor="surname">Nazwisko</label>
                         </div>
 
                         <div className="form-child">
-                            <input name="username" type="text" required onChange={e => setEmail(e.target.value)} />
-                            <label htmlFor="username">ID klasy</label>
+                            <input name="klasa" type="text" required onChange={e => setEmail(e.target.value)} />
+                            <label htmlFor="klasa">ID klasy</label>
                         </div>
 
                         <div className="form-child">
-                            <input name="username" type="text" required onChange={e => setRegisterUserName(e.target.value)} />
-                            <label htmlFor="username">Login</label>
+                            <input name="login" type="text" required onChange={e => setRegisterUserName(e.target.value)} />
+                            <label htmlFor="login">Login</label>
                         </div>
 
                         <div className="form-child">
-                            <input name="username" type="password" required onChange={e => setRegisterPassword(e.target.value)} />
-                            <label htmlFor="username">Hasło</label>
+                            <input name="pwd" type="password" required onChange={e => setRegisterPassword(e.target.value)} />
+                            <label htmlFor="pwd">Hasło</label>
                         </div>
     
                         <div className="form-child">
