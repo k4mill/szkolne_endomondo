@@ -4,7 +4,7 @@ import './css/teacherpanel.css';
 import Select from 'react-select';
 
 function getTeacherID() {
-  return axios.get('http://localhost:8080/api/getUserByUsername', {
+  return axios.get('http://20.52.157.254:8080/api/getUserByUsername', {
     params: {
       username: JSON.parse(sessionStorage.getItem('token')).token
     }
@@ -46,7 +46,7 @@ class TeacherPanel extends Component {
 
   handleClassChange(klasa) {
     this.setState({ selectedClass: klasa })
-    axios.get('http://localhost:8080/api/getClassById', {
+    axios.get('http://20.52.157.254:8080/api/getClassById', {
       params: {
         id: klasa.value
       }
@@ -71,7 +71,7 @@ class TeacherPanel extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.get('http://localhost:8080/api/getAllActivities', {
+    axios.get('http://20.52.157.254:8080/api/getAllActivities', {
       params: {
         uczen_ID: this.state.selectedStudent.value
       }
@@ -84,7 +84,7 @@ class TeacherPanel extends Component {
   componentDidMount() {
     document.title = 'TTM - panel nauczyciela';
     getTeacherID().then((res) => {
-      axios.get('http://localhost:8080/api/getClass', {
+      axios.get('http://20.52.157.254:8080/api/getClass', {
         params: {
           nauczyciel_ID: res.data.ID
         }

@@ -50,14 +50,14 @@ class DodajAkt extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    axios.get('http://localhost:8080/api/getUserByUsername', {
+    axios.get('http://20.52.157.254:8080/api/getUserByUsername', {
         params: {
           username: JSON.parse(sessionStorage.getItem('token')).token
         }
       })
       .then(res => {
         const user_ID = res.data.ID;
-          axios.put('http://localhost:8080/api/insertActivity', {
+          axios.put('http://20.52.157.254:8080/api/insertActivity', {
             uczen_ID: user_ID,
             data_wprowadzenia: `'${getCurrentDate()}'`,
             typ_ID: `${this.state.typ.value}`,
@@ -85,7 +85,7 @@ class DodajAkt extends Component {
 
   componentDidMount() {
     document.title = 'TTM - dodaj aktywność';
-    axios.get('http://localhost:8080/api/getActivityTypes')
+    axios.get('http://20.52.157.254:8080/api/getActivityTypes')
       .then(res => {
         let options = [];
         res.data.map(act => {

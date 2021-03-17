@@ -16,14 +16,14 @@ class Podsumowanie extends Component {
   }
 
   getActivityList(token_username) {
-    return axios.get('http://localhost:8080/api/getUserByUsername', {
+    return axios.get('http://20.52.157.254:8080/api/getUserByUsername', {
         params: {
           username: token_username
         }
       })
     .then(res => {
         var user_ID = res.data.ID;
-        return axios.get('http://localhost:8080/api/getAllActivities', {
+        return axios.get('http://20.52.157.254:8080/api/getAllActivities', {
           params: {
             uczen_ID: user_ID
           }
@@ -44,7 +44,7 @@ class Podsumowanie extends Component {
     const actID = e.currentTarget.id;
     let token_username = JSON.parse(sessionStorage.getItem('token')).token;
 
-    axios.delete('http://localhost:8080/api/deleteActivity', {
+    axios.delete('http://20.52.157.254:8080/api/deleteActivity', {
       params: {
         id: actID
       }

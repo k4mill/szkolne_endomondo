@@ -6,7 +6,7 @@ import Select from 'react-select';
 
 export default function Login({ setToken }) {
     async function loginUser(creds) {
-        return axios.post('http://localhost:8080/api/login', {
+        return axios.post('http://20.52.157.254:8080/api/login', {
             data: {
                 username: `${creds.loginUsername}`,
                 password: `${creds.loginPassword}`
@@ -21,7 +21,7 @@ export default function Login({ setToken }) {
     }
     
     async function registerUser(details) {
-        return axios.post('http://localhost:8080/api/createUser', {
+        return axios.post('http://20.52.157.254:8080/api/createUser', {
             data: {
                 username: `${details.registerUsername}`,
                 password: `${details.registerPassword}`,

@@ -18,7 +18,7 @@ class Profil extends Component {
     document.title = 'TTM - profil';
     let token_username = JSON.parse(sessionStorage.getItem('token')).token;
 
-    axios.get('http://localhost:8080/api/getUserByUsername', {
+    axios.get('http://20.52.157.254:8080/api/getUserByUsername', {
         params: {
           username: token_username
         }
